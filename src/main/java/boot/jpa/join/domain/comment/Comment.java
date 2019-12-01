@@ -20,11 +20,11 @@ public class Comment {
     private String comment;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", foreignKey = @ForeignKey(name = "FK_COMMENT_POST"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_COMMENT_POST"))
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_COMMENT_USER"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_COMMENT_USER"))
     private User user;
 
     @Builder

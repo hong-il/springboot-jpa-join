@@ -26,7 +26,7 @@ public class Post {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_POST_COMMENT"))
+    @JoinColumn(foreignKey = @ForeignKey(name = "FK_POST_USER"))
     private User user;
 
     @OneToMany(mappedBy = "post", cascade = ALL, fetch = FetchType.EAGER)
