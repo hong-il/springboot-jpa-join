@@ -11,9 +11,19 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select u.posts " +
             "from User u ")
-    List<Post> findAllPost();
+    List<Post> ImplicitInnerJoinUserPost();
 
     @Query("select u.comments " +
             "from User u ")
-    List<Comment> findAllComment();
+    List<Comment> ImplicitInnerJoinUserComment();
+
+    @Query("select p " +
+            "from Post p " +
+            "INNER JOIN p.user u")
+    List<Post> ExplicitInnerJoinUserPost();
+
+    @Query("select c " +
+            "from Comment c " +
+            "INNER JOIN c.user u")
+    List<Comment> ExplicitInnerJoinUserComment();
 }

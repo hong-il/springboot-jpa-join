@@ -33,7 +33,7 @@ public class UserRepositoryTest {
 
         //when
         /** select u.posts from User u*/
-        List<PostFindAllDto> posts = userRepository.findAllPost().stream()
+        List<PostFindAllDto> posts = userRepository.ImplicitInnerJoinUserPost().stream()
                 .map(PostFindAllDto::new)
                 .collect(Collectors.toList());
 
@@ -47,7 +47,35 @@ public class UserRepositoryTest {
 
         //when
         /** select u.comments from User u*/
-        List<CommentFindAllDto> comments = userRepository.findAllComment().stream()
+        List<CommentFindAllDto> comments = userRepository.ImplicitInnerJoinUserComment().stream()
+                .map(CommentFindAllDto::new)
+                .collect(Collectors.toList());
+
+        //then
+        assertThat(comments.size(), is(12));
+    }
+
+    @Test
+    public void ExplicitInnerJoinUserPost() {
+        //given : data-h2.sql
+
+        //when
+        /** select p from Post p INNER JOIN p.user u*/
+        List<PostFindAllDto> posts = userRepository.ExplicitInnerJoinUserPost().stream()
+                .map(PostFindAllDto::new)
+                .collect(Collectors.toList());
+
+        //then
+        assertThat(posts.size(), is(4));
+    }
+
+    @Test
+    public void ExplicitInnerJoinUserComment() {
+        //given : data-h2.sql
+
+        //when
+        /** select c from Comment c INNER JOIN c.user u*/
+        List<CommentFindAllDto> comments = userRepository.ExplicitInnerJoinUserComment().stream()
                 .map(CommentFindAllDto::new)
                 .collect(Collectors.toList());
 
