@@ -53,4 +53,18 @@ public class PostRepositoryTest {
         //then
         assertThat(posts.size(), is(12));
     }
+
+    @Test
+    public void CartesianProductPostComment() {
+        //given : data-h2.sql
+
+        //when
+        /** select p from Comment c, Post p*/
+        List<PostFindAllDto> posts = postRepository.CartesianProductPostComment().stream()
+                .map(PostFindAllDto::new)
+                .collect(Collectors.toList());
+
+        //then
+        assertThat(posts.size(), is(48));
+    }
 }

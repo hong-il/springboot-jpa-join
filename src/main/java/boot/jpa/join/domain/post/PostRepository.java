@@ -16,4 +16,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "from Comment c, Post p " +
             "WHERE c.post = p")
     List<Post> JoinWhereClausePostComment();
+
+    @Query("select p " +
+            "from Comment c, Post p")
+    List<Post> CartesianProductPostComment();
 }
