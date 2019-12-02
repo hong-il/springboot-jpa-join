@@ -39,4 +39,18 @@ public class PostRepositoryTest {
         //then
         assertThat(posts.size(), is(4));
     }
+
+    @Test
+    public void JoinWhereClausePostComment() {
+        //given : data-h2.sql
+
+        //when
+        /** select p from Comment c, Post p WHERE c.post = p*/
+        List<PostFindAllDto> posts = postRepository.JoinWhereClausePostComment().stream()
+                .map(PostFindAllDto::new)
+                .collect(Collectors.toList());
+
+        //then
+        assertThat(posts.size(), is(12));
+    }
 }

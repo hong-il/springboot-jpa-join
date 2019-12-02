@@ -11,4 +11,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "from Post p " +
             "LEFT JOIN p.comments c")
     List<Post> LeftOuterJoinPostComment();
+
+    @Query("select p " +
+            "from Comment c, Post p " +
+            "WHERE c.post = p")
+    List<Post> JoinWhereClausePostComment();
 }
