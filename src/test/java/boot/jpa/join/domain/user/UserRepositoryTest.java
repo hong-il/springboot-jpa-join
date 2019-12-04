@@ -2,6 +2,7 @@ package boot.jpa.join.domain.user;
 
 import boot.jpa.join.dto.comment.CommentFindAllDto;
 import boot.jpa.join.dto.post.PostFindAllDto;
+import boot.jpa.join.dto.user.UserFindAllDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -81,5 +82,19 @@ public class UserRepositoryTest {
 
         //then
         assertThat(comments.size(), is(12));
+    }
+
+    @Test
+    public void FetchJoinUserPost() {
+        //given : data-h2.sql
+
+        //when
+        /** select u from User u JOIN FETCH u.posts*/
+        List<UserFindAllDto> users = userRepository.FetchJoinUserPost().stream()
+                .map(UserFindAllDto::new)
+                .collect(Collectors.toList());
+
+        //then
+        assertThat(users.size(), is(4));
     }
 }
