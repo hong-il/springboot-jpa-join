@@ -97,4 +97,18 @@ public class UserRepositoryTest {
         //then
         assertThat(users.size(), is(4));
     }
+
+    @Test
+    public void FetchLeftJoinUserComment() {
+        //given : data-h2.sql
+
+        //when
+        /** select u from User u LEFT JOIN FETCH u.comments*/
+        List<UserFindAllDto> users = userRepository.FetchLeftJoinUserComment().stream()
+                .map(UserFindAllDto::new)
+                .collect(Collectors.toList());
+
+        //then
+        assertThat(users.size(), is(12));
+    }
 }

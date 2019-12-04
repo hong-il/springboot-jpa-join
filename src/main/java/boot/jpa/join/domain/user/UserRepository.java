@@ -31,4 +31,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "from User u " +
             "JOIN FETCH u.posts")
     List<User> FetchJoinUserPost();
+
+    @Query("select u " +
+            "from User u " +
+            "LEFT JOIN FETCH u.comments")
+    List<User> FetchLeftJoinUserComment();
 }
